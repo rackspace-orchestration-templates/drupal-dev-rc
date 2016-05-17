@@ -16,7 +16,7 @@ test-cases:
           env:
             user: root
             key_filename: tmp/private_key
-            hosts: { get_output: server_ip } # Fetch from output-list of stack
+            hosts: { get_output: drupal_public_ip } # Fetch from output-list of stack
             tasks:
               - artifacts
               - check
@@ -35,21 +35,12 @@ test-cases:
     ssh_private_key: { get_output: ssh_private_key } # Fetch from output-list of stack
     ssh_key_file: tmp/private_key # File to write with ssh_private_key
     tests:
-    - check_lb_login:
-        script:
-          commands:
-            - command: "./test/script/drupal_login.py"
-              command_args:
-                - { get_output: drupal_public_ip }
-                - { get_output: drupal_public_url }
-                - { get_output: drupal_login_user }
-                - { get_output: drupal_login_password }
     - check_master_login:
         script:
           commands:
             - command: "./test/script/drupal_login.py"
               command_args:
-                - { get_output: server_ip }
+                - { get_output: drupal_public_ip }
                 - { get_output: drupal_public_url }
                 - { get_output: drupal_login_user }
                 - { get_output: drupal_login_password }
@@ -60,7 +51,7 @@ test-cases:
           env:
             user: root
             key_filename: tmp/private_key
-            hosts: { get_output: server_ip } # Fetch from output-list of stack
+            hosts: { get_output: drupal_public_ip } # Fetch from output-list of stack
             tasks:
               - artifacts
               - check
