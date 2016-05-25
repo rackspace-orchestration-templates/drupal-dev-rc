@@ -12,6 +12,8 @@ description: |
   **This deployment is meant for development and testing scenarios only and is not
   intended for production use**.
 
+  This template will only function with RackConnect v3.
+
 parameter_groups:
 - label: Drupal Settings
   parameters:
